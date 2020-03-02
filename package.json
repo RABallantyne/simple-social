@@ -1,0 +1,16 @@
+{
+  "name": "simple-social",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/RABallantyne/simple-social.git",
+  "author": "Jerkbert <raballantyne@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "rails s --prefix back-end",
+    "client": "yarn start --prefix client",
+    "dev": "concurrently  \"yarn run client\""
+  },
+  "dependencies": {
+    "concurrently": "^5.1.0"
+  }
+}
