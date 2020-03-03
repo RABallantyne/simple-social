@@ -15,7 +15,7 @@ class PostsController < ApplicationController
 
   # POST /posts
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.new(post_params)
 
     if @post.save
       render json: @post, status: :created, location: @post
@@ -26,20 +26,27 @@ class PostsController < ApplicationController
 
   # PATCH/PUT /posts/1
   def update
-    if @post.update(post_params)
+    
+    if @post.user_id === current_user.id
+      @post.update(post_params)
       render json: @post
     else
-      render json: @post.errors, status: :unprocessable_entity
+      render json: {message: 'permission denied', errors: @post.errors}, status: :unprocessable_entity
     end
   end
 
   # DELETE /posts/1
   def destroy
-    @comments = Comment.where(post_id: @post.id)
-    @comments.each do |comment|
-      comment.destroy
+    if @post.user_id === current_user.id
+      @comments = Comment.where(post_id: @post.id)
+        @comments.each do |comment|
+          comment.destroy
+        end
+      @post.destroy
+      render json: {message: 'post deleted'}
+      else
+        render json: {message: 'permission denied'}
     end
-    @post.destroy
   end
 
   private
@@ -50,6 +57,6 @@ class PostsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def post_params
-      params.fetch(:post).permit(:content, :likes, :user_id)
+      params.fetch(:post).permit(:content, :likes, current_user.id)
     end
 end
