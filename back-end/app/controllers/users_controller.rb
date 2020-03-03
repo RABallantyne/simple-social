@@ -6,10 +6,10 @@ class UsersController < ApplicationController
   def index
     @users = User.all
 
-    render json: @users
+    render json: @users, except: [:password_digest, :updated_at]
   end
 
-  # GET /users/1
+  # GET /dashboard
   def dashboard
     render json: {user: current_user, posts: current_user.posts, comments: current_user.comments}
   end

@@ -44,8 +44,8 @@ class PostsController < ApplicationController
         end
       @post.destroy
       render json: {message: 'post deleted'}
-      else
-        render json: {message: 'permission denied'}
+    else
+      render json: {message: 'permission denied'}
     end
   end
 
@@ -57,6 +57,6 @@ class PostsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def post_params
-      params.fetch(:post).permit(:content, :likes, current_user.id)
+      params.fetch(:post).permit(:content, :likes)
     end
 end
