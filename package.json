@@ -6,9 +6,10 @@
   "author": "Jerkbert <raballantyne@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "rails s --prefix back-end",
-    "client": "yarn start --prefix client",
-    "dev": "concurrently  \"yarn run client\""
+    "start": "node server",
+    "server": "cd back-end && rails s",
+    "client": "cd client && yarn start",
+    "dev": "concurrently  \"yarn run server\" \"yarn run client\""
   },
   "dependencies": {
     "concurrently": "^5.1.0"

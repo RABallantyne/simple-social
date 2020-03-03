@@ -1,54 +1,39 @@
 import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
+import Login from './Login';
+
 import './App.css';
 
 function App() {
-  const [nameData, setNameData] = useState({
-    users: []
-  });
+  const [user, setUser] = useState(null);
 
-  const addUser = user => {
-    console.log(user);
-    // fetch('http://localhost:3000/users', {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json"
-    //   },
-    //   body: user
-    // }.then((response)=> {
-    //   return response.json()
-    // }).then((data)=>{
-    //   console.log(data)
-    // })
-  };
-
-  const loadUsers = () => {
-    fetch('http://localhost:3000/users')
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        setNameData(data);
+  const login = user => {
+    fetch('http://localhost:3000/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ user })
+    })
+      .then(response => response.json())
+      .then(user => {
+        localStorage.setItem('token', user.jwt);
+        setUser(user.user);
       });
   };
-  // console.log(nameData);
-  useEffect(() => {
-    loadUsers();
-  }, []);
 
-  const showUsers = () => {
-    let users =
-      nameData.length > 0 &&
-      nameData.map(data => {
-        console.log(data);
-        return <div key={data.id}>{data.name}</div>;
-      });
-    return users;
-
-    // }
-    // addUser()
+  const logout = () => {
+    localStorage.removeItem('token');
+    setUser(null);
   };
-  return <div>{showUsers()}</div>;
+  console.log(user);
+
+  return (
+    <>
+      <h1>{user ? 'logged in' : 'please log in'}</h1>
+      <Login login={login} user={user} />
+      <button onClick={() => logout()}>log out</button>
+    </>
+  );
 
   // return <div>{showUsers(nameData)}</div>;
 }

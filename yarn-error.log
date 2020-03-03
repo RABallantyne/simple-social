@@ -1,8 +1,8 @@
 Arguments: 
-  /usr/local/Cellar/node/12.11.1/bin/node /usr/local/Cellar/yarn/1.19.1/libexec/bin/yarn.js run dev
+  /usr/local/Cellar/node/12.11.1/bin/node /usr/local/Cellar/yarn/1.19.1/libexec/bin/yarn.js run client
 
 PATH: 
-  /Users/raballantyne/.rvm/gems/ruby-2.6.1/bin:/Users/raballantyne/.rvm/gems/ruby-2.6.1@global/bin:/Users/raballantyne/.rvm/rubies/ruby-2.6.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/raballantyne/.rvm/gems/ruby-2.6.1/bin:/Users/raballantyne/.rvm/gems/ruby-2.6.1@global/bin:/Users/raballantyne/.rvm/rubies/ruby-2.6.1/bin:/Users/raballantyne/.rvm/bin:/Users/raballantyne/.rvm/bin
+  /Users/raballantyne/.rvm/gems/ruby-2.6.1/bin:/Users/raballantyne/.rvm/gems/ruby-2.6.1@global/bin:/Users/raballantyne/.rvm/rubies/ruby-2.6.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/raballantyne/.rvm/bin
 
 Yarn version: 
   1.19.1
@@ -14,7 +14,7 @@ Platform:
   darwin x64
 
 Trace: 
-  SyntaxError: /Users/raballantyne/Desktop/simple-social/package.json: Unexpected string in JSON at position 385
+  SyntaxError: /Users/raballantyne/Desktop/simple-social/package.json: Unexpected string in JSON at position 255
       at JSON.parse (<anonymous>)
       at /usr/local/Cellar/yarn/1.19.1/libexec/lib/cli.js:1625:59
       at Generator.next (<anonymous>)
@@ -30,10 +30,11 @@ npm manifest:
     "author": "Jerkbert <raballantyne@gmail.com>",
     "license": "MIT",
     "scripts": {
+      "start":"yarn start"
       "server": "rails s --prefix back-end",
       "client": "yarn start --prefix client",
-      "dev": "concurrently \"yarn run server\" \"yarn run client\""
-    }
+      "dev": "concurrently  \"yarn run server\" \"yarn run client\""
+    },
     "dependencies": {
       "concurrently": "^5.1.0"
     }
