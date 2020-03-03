@@ -7,6 +7,21 @@ function App() {
     users: []
   });
 
+  const addUser = user => {
+    console.log(user);
+    // fetch('http://localhost:3000/users', {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json"
+    //   },
+    //   body: user
+    // }.then((response)=> {
+    //   return response.json()
+    // }).then((data)=>{
+    //   console.log(data)
+    // })
+  };
+
   const loadUsers = () => {
     fetch('http://localhost:3000/users')
       .then(response => {
@@ -31,6 +46,7 @@ function App() {
     return users;
 
     // }
+    // addUser()
   };
   return <div>{showUsers()}</div>;
 
