@@ -35,6 +35,10 @@ class PostsController < ApplicationController
 
   # DELETE /posts/1
   def destroy
+    @comments = Comment.where(post_id: @post.id)
+    @comments.each do |comment|
+      comment.destroy
+    end
     @post.destroy
   end
 
