@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
-
+import Post from './components/post/Post';
 import './App.css';
 
 function App() {
@@ -49,6 +49,8 @@ function App() {
       <Login login={login} user={user} />
       <Register user={user} newUser={newUser} />
       <button onClick={() => logout()}>log out</button>
+
+      <Post />
     </>
   );
 
