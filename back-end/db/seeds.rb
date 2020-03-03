@@ -9,3 +9,5 @@
 users = User.create([{name: "Rob", password: "testing"}])
 
 posts = Post.create([{content: "This is a post it is cool", likes: 0, user_id: 1}])
+
+comments = Comment.create([{content: "I like this post", likes:0, user_id: 1, post_id: 1}])

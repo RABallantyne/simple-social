@@ -1,2 +1,6 @@
 class ApplicationController < ActionController::API
+  rescue_from ActiveRecord::RecordNotFound, :with => :render_404
+  def render_404 
+    render json: {message: 'record not found'}
+  end
 end

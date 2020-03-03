@@ -46,6 +46,6 @@ class CommentsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def comment_params
-      params.fetch(:comment, {})
+      params.fetch(:comment).permit(:content, :likes, :user_id, :post_id)
     end
 end

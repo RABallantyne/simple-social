@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
-    render json: @user
+    render json: {user: @user, posts: @user.posts, comments: @user.comments}
   end
 
   # POST /users
