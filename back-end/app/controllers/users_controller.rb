@@ -35,6 +35,14 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   def destroy
+    @comments = Comment.where(user_id: @user.id)
+    @comments.each do |comment|
+      comment.destroy
+    end
+    @posts = Post.where(user_id: @user.id)
+    @posts.each do |post|
+      post.destroy
+    end
     @user.destroy
   end
 
