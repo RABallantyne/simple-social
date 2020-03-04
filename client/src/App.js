@@ -62,7 +62,6 @@ function App() {
     localStorage.removeItem('token');
     setUser(null);
   };
-  // user && console.log(user.name);
 
   return (
     <>
@@ -74,8 +73,6 @@ function App() {
       {user && <PostMain user={user.name} />}
     </>
   );
-
-  // return <div>{showUsers(nameData)}</div>;
 }
 
 export default App;

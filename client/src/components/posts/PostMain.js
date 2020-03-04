@@ -56,6 +56,7 @@ export default function PostMain({ user }) {
 
   return (
     <div>
+      <h2>welcome {user}. Select a post to see more.</h2>
       {postTitles}
       <PostDisplay selected={posts.selectedPost} />
     </div>
