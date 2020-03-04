@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import PostCard from './PostCard';
+import PostDisplay from './PostDisplay';
 
-export default function Post() {
+export default function PostMain({ user }) {
   const [posts, setPosts] = useState({
     posts: [],
-    selected: null
+    selection: null,
+    selectedPost: {}
   });
 
   const showPosts = () => {
@@ -17,7 +18,21 @@ export default function Post() {
     })
       .then(res => res.json())
       .then(data => {
-        setPosts({ posts: data, selected: null });
+        setPosts({ posts: data, selection: null, selectedPost: {} });
+      });
+  };
+
+  const showSinglePost = selection => {
+    const token = localStorage.getItem('token');
+    fetch(`http://localhost:3000/posts/${selection}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        setPosts({ ...posts, selection: null, selectedPost: data });
       });
   };
 
@@ -26,12 +41,8 @@ export default function Post() {
   }, []);
 
   const choosePost = id => {
-    setPosts({
-      ...posts,
-      selected: id
-    });
+    showSinglePost(id);
   };
-  // console.log(posts);
 
   const postTitles =
     posts.posts.length > 0 &&
@@ -39,17 +50,14 @@ export default function Post() {
       return (
         <div onClick={() => choosePost(post.id)} key={post.id}>
           <h1>{post.title ? post.title : 'Untitled'}</h1>
-          {/* <p>{post.content}</p> */}
         </div>
       );
     });
 
-  let postDisplay = posts.posts.filter(post => post.id === posts.selected);
-
   return (
     <div>
       {postTitles}
-      <PostCard posts={posts.posts} selected={postDisplay} />
+      <PostDisplay selected={posts.selectedPost} />
     </div>
   );
 }

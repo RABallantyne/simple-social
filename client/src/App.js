@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
-import Post from './components/post/Post';
+import PostMain from './components/posts/PostMain';
 import './App.css';
 
 function App() {
@@ -62,6 +62,7 @@ function App() {
     localStorage.removeItem('token');
     setUser(null);
   };
+  // user && console.log(user.name);
 
   return (
     <>
@@ -70,7 +71,7 @@ function App() {
       <Register user={user} newUser={newUser} />
       <button onClick={() => logout()}>log out</button>
 
-      {user && <Post />}
+      {user && <PostMain user={user.name} />}
     </>
   );
 
