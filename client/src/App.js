@@ -7,6 +7,27 @@ import './App.css';
 function App() {
   const [user, setUser] = useState(null);
 
+  const checkLogIn = () => {
+    const token = localStorage.token;
+    if (token) {
+      fetch('http://localhost:3000/dashboard', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        }
+      })
+        .then(res => res.json())
+        .then(user => {
+          setUser(user.user);
+        });
+    }
+  };
+
+  useEffect(() => {
+    checkLogIn();
+  }, []);
+
   const login = user => {
     fetch('http://localhost:3000/login', {
       method: 'POST',
@@ -41,7 +62,6 @@ function App() {
     localStorage.removeItem('token');
     setUser(null);
   };
-  console.log(user);
 
   return (
     <>
@@ -50,7 +70,7 @@ function App() {
       <Register user={user} newUser={newUser} />
       <button onClick={() => logout()}>log out</button>
 
-      <Post />
+      {user && <Post />}
     </>
   );
 
