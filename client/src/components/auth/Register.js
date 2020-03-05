@@ -49,7 +49,7 @@ export default function Register({ newUser }) {
           onChange={e => onChange(e)}
           required
         />
-        <input type='submit' value='Login' />
+        <input type='submit' value='Sign up' />
       </form>
     </>
   );
