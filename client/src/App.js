@@ -64,14 +64,20 @@ function App() {
   };
 
   return (
-    <>
-      <h1>{user ? 'logged in' : 'please log in'}</h1>
-      <Login login={login} user={user} />
+    <div className='container'>
+      <>
+        {user ? (
+          <PostMain user={user.name} />
+        ) : (
+          <Login login={login} user={user} />
+        )}
+      </>
+
       <Register user={user} newUser={newUser} />
       <button onClick={() => logout()}>log out</button>
 
-      {user && <PostMain user={user.name} />}
-    </>
+      {/* {user && } */}
+    </div>
   );
 }
 

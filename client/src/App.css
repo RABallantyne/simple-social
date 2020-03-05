@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+
+.posts-container {
+  display: flex;
+}
+
+.post-title {
+  padding: 1em;
+}
+
+.container {
+  background: black;
+  color: yellow;
+  padding: 0.5em;
+  margin: 0.5em;
+}

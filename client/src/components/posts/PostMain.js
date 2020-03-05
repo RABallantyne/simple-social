@@ -42,6 +42,7 @@ export default function PostMain({ user }) {
 
   const choosePost = id => {
     showSinglePost(id);
+    console.log(posts.selectedPost);
   };
 
   const postTitles =
@@ -49,7 +50,9 @@ export default function PostMain({ user }) {
     posts.posts.map(post => {
       return (
         <div onClick={() => choosePost(post.id)} key={post.id}>
-          <h1>{post.title ? post.title : 'Untitled'}</h1>
+          <div className='post-title'>
+            {post.title ? post.title : 'Untitled'}
+          </div>
         </div>
       );
     });
@@ -57,8 +60,13 @@ export default function PostMain({ user }) {
   return (
     <div>
       <h2>welcome {user}. Select a post to see more.</h2>
-      {postTitles}
+      <div className='posts-container'>{postTitles}</div>
+      {/* {posts.selectedPost !== undefined ? ( */}
       <PostDisplay selected={posts.selectedPost} />
+      {/* ) : ( */}
+      {/* postTitles */}
+      {/* )} */}
+      {/* <PostDisplay selected={posts.selectedPost} /> */}
     </div>
   );
 }
